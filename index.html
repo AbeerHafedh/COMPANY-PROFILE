@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Tech Time · وقت التكنولوجيا — mobile first</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* reset و اساسيات مرنة */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #eef3f9;
+      font-family: 'Space Grotesk', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 12px;
+      min-height: 100vh;
+    }
+
+    :root {
+      --tech-deep: #001b3a;
+      --tech-royal: #003b6f;
+      --tech-bright: #0066b3;
+      --tech-accent: #ffb347;
+      --tech-accent-glow: #ff9f1c;
+      --tech-sky: #e2f0ff;
+      --tech-white: #ffffff;
+      --tech-gray: #1e2f40;
+      --tech-light: #f5f9ff;
+    }
+
+    .brochure {
+      max-width: 1200px;
+      width: 100%;
+      background: var(--tech-white);
+      border-radius: 40px;
+      box-shadow: 0 25px 50px -12px #001b3ab3;
+      overflow: hidden;
+    }
+
+    /* الصفحات بمساحات مريحة للهاتف */
+    .page {
+      padding: clamp(2rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* خلفية ناعمة متحركة (خفيفة على الاداء) */
+    .page::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 60%;
+      height: 70%;
+      background: radial-gradient(circle at 70% 30%, rgba(0,107,179,0.03) 0%, transparent 70%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* عناوين مرنة */
+    h2 {
+      font-size: clamp(2.2rem, 7vw, 3.8rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--tech-deep);
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 2;
+      line-height: 1.2;
+      word-break: break-word;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: clamp(80px, 15vw, 140px);
+      height: 6px;
+      background: linear-gradient(90deg, var(--tech-accent), var(--tech-bright));
+      border-radius: 8px;
+    }
+
+    h3 {
+      font-size: clamp(1.6rem, 5vw, 2.2rem);
+      font-weight: 600;
+      color: var(--tech-deep);
+      margin: 1.2rem 0 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    h3 i {
+      color: var(--tech-accent);
+      font-size: 1.8rem;
+    }
+
+    p, li {
+      font-size: clamp(1rem, 3.5vw, 1.2rem);
+      line-height: 1.6;
+      color: var(--tech-gray);
+      word-break: break-word;
+    }
+
+    /* grids متجاوبة تلقائياً */
+    .grid-2, .grid-3 {
+      display: grid;
+      gap: 1.8rem;
+      position: relative;
+      z-index: 5;
+    }
+
+    .grid-2 {
+      grid-template-columns: 1fr;
+    }
+
+    .grid-3 {
+      grid-template-columns: 1fr;
+    }
+
+    /* للاجهزة اللوحية فما فوق */
+    @media (min-width: 640px) {
+      .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 900px) {
+      .grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* بطاقات محسنة للمس */
+    .card {
+      background: var(--tech-white);
+      border-radius: 32px;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 15px 30px -10px rgba(0,27,58,0.1);
+      border: 1px solid rgba(0,102,179,0.15);
+      transition: transform 0.2s ease, box-shadow 0.2s;
+      position: relative;
+      z-index: 5;
+      overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .card:active {
+      transform: scale(0.98);
+      background: #f9fcff;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--tech-accent), var(--tech-bright));
+    }
+
+    .icon-large {
+      font-size: 3rem;
+      color: var(--tech-bright);
+      margin-bottom: 1rem;
+    }
+
+    /* سحابة اللغات قابلة للالتفاف */
+    .lang-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin: 1.8rem 0;
+    }
+
+    .lang-chip {
+      background: var(--tech-deep);
+      color: white;
+      padding: 0.6rem 1.4rem;
+      border-radius: 60px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 5px 0 #001022;
+      transition: 0.1s;
+      display: inline-block;
+    }
+
+    .lang-chip:nth-child(odd) {
+      background: var(--tech-royal);
+    }
+
+    .lang-chip:active {
+      transform: translateY(2px);
+      box-shadow: 0 3px 0 #001022;
+    }
+
+    /* الغلاف الرئيسي */
+    .cover {
+      background: linear-gradient(145deg, #001227, #002b52);
+      padding: clamp(3rem, 12vw, 6rem) 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 50%, rgba(255,180,70,0.15) 0%, transparent 60%);
+      z-index: 1;
+    }
+
+    .cover h1 {
+      font-size: clamp(3.5rem, 15vw, 7rem);
+      font-weight: 800;
+      color: white;
+      line-height: 1;
+      text-shadow: 0 10px 20px #00000060;
+      letter-spacing: -1px;
+      position: relative;
+      z-index: 5;
+      word-break: break-word;
+    }
+
+    .cover .sub {
+      font-size: clamp(1.1rem, 4vw, 1.6rem);
+      color: #b0d4ff;
+      margin-top: 1.8rem;
+      border-top: 2px solid #ffb347;
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      background: rgba(0,0,0,0.2);
+      backdrop-filter: blur(8px);
+      border-radius: 60px;
+      z-index: 5;
+      position: relative;
+      max-width: 90%;
+    }
+
+    /* شارة الخبرة - مرنة */
+    .experience-badge {
+      background: var(--tech-deep);
+      border-radius: 50px;
+      padding: 1.2rem 1.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      color: white;
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+      font-weight: 700;
+      border: 2px solid var(--tech-accent);
+      box-shadow: 0 15px 20px -10px black;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* كتلة الاتصال للهاتف */
+    .contact-block {
+      background: var(--tech-deep);
+      border-radius: 40px;
+      padding: 2.2rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+      border: 2px solid var(--tech-accent);
+      box-shadow: 0 15px 0 #001227;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      color: white;
+      font-size: 1.1rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-item i {
+      font-size: 2rem;
+      color: var(--tech-accent);
+      min-width: 2rem;
+    }
+
+    /* شريط سفلي للويب */
+    .website-link {
+      background: #ffb347;
+      color: #001b3a;
+      padding: 0.8rem 2rem;
+      border-radius: 60px;
+      font-weight: 800;
+      font-size: clamp(1.2rem, 5vw, 2rem);
+      display: inline-block;
+      text-decoration: none;
+      margin-top: 2rem;
+      word-break: break-all;
+    }
+
+    /* تعديلات صغيرة للهاتف */
+    @media (max-width: 480px) {
+      .page {
+        padding: 2rem 1.2rem;
+      }
+      .card {
+        padding: 1.8rem 1.2rem;
+      }
+      .contact-item {
+        font-size: 1rem;
+      }
+    }
+
+    /* تحسين المس */
+    .card, .lang-chip, .website-link {
+      cursor: pointer;
+      -webkit-touch-callout: none;
+    }
+
+    /* فاصل زخرفي */
+    .glow-dot {
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, #ffb34730 0%, transparent 70%);
+      position: absolute;
+      border-radius: 50%;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+<div class="brochure">
+  <!-- الغلاف -->
+  <div class="cover">
+    <div class="glow-dot" style="top:-30px; right:-30px;"></div>
+    <h1>TECH TIME</h1>
+    <div class="sub">COMPANY PROFILE</div>
+  </div>
+
+  <!-- about -->
+  <div class="page">
+    <h2>About TechTime</h2>
+    <div style="display:flex; flex-direction:column; gap:2rem;">
+      <div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:center;">
+        <span class="experience-badge"><i class="fas fa-star" style="color:var(--tech-accent);"></i> 15+ years</span>
+        <span style="font-size:1.8rem; font-weight:700; color:var(--tech-royal);">est. 2018</span>
+      </div>
+      <p style="font-size:1.2rem; font-weight:500;">Founded by experts with <strong>15+ years</strong> in software & IT, serving <strong>Oil & Gas, Telecom, Health, Education, Hospitality</strong> and more.</p>
+      <div style="background: rgba(0,59,111,0.02); padding: 1.8rem; border-radius: 32px; border: 1px solid rgba(0,102,179,0.15);">
+        <p>We tailor the perfect software solution, amplify your goals, and streamline operations. Your digital transformation partner.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vision & mission -->
+  <div class="page" style="background: linear-gradient(120deg, #f5fbff, white);">
+    <div class="grid-2">
+      <div class="card">
+        <i class="fas fa-bullseye icon-large" style="color:#ffb347;"></i>
+        <h3 style="margin-top:0;">Vision</h3>
+        <p style="font-size:1.8rem; font-weight:700; color:var(--tech-deep);">#1 software company in Iraq</p>
+        <p>Powerful ideas, faster processes, lower cost, better results.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-eye icon-large" style="color:#0066b3;"></i>
+        <h3 style="margin-top:0;">Mission</h3>
+        <p style="font-size:1.8rem; font-weight:700; color:var(--tech-deep);">accelerate digital transformation</p>
+        <p>Make data accessible, increase efficiency, deliver future-ready software.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services -->
+  <div class="page" style="background: var(--tech-light);">
+    <h2>Our Services</h2>
+    <div class="grid-3">
+      <div class="card"><i class="fas fa-database icon-large"></i><h3>ERP SYSTEMS</h3><p>Microsoft Dynamics, Odoo, SAP, Trend ERP — Finance, HR, CRM, Supply Chain.</p></div>
+      <div class="card"><i class="fas fa-cloud icon-large"></i><h3>CLOUD SERVICES</h3><p>Azure, AWS, Google, IBM, TechTime Cloud, Microsoft 365 — reduce cost, boost reliability.</p></div>
+      <div class="card"><i class="fas fa-code icon-large"></i><h3>CUSTOM SOFTWARE</h3><p>Tailored content management, accounting, web apps — designed for your exact needs.</p></div>
+      <div class="card"><i class="fas fa-paint-brush icon-large"></i><h3>WEBSITE DESIGN</h3><p>Dynamic, professional, fully editable. Basic to enterprise with admin training.</p></div>
+      <div class="card"><i class="fas fa-server icon-large"></i><h3>HOSTING</h3><p>Managed shared, VPS, dedicated, cloud, email & database hosting, domain registration.</p></div>
+      <div class="card"><i class="fas fa-mobile-alt icon-large"></i><h3>MOBILE APPS</h3><p>Native (iOS/Android), cross‑platform, TV/OTT apps — build, test, deploy at scale.</p></div>
+    </div>
+    <!-- IT consultant banner -->
+    <div style="background: var(--tech-deep); border-radius: 50px; padding: 2rem 1.8rem; margin-top: 2.2rem; color:white; display:flex; gap:1.5rem; align-items:center; flex-wrap:wrap;">
+      <i class="fas fa-headset" style="font-size:3rem; color:var(--tech-accent);"></i>
+      <div><h3 style="color:white; margin:0;">IT CONSULTANT</h3><p style="color:#bdd9ff;">world‑class consulting — business process, cost reduction, project management.</p></div>
+    </div>
+  </div>
+
+  <!-- Coding languages (mobile friendly cloud) -->
+  <div class="page" style="background: var(--tech-deep); color: white;">
+    <h2 style="color: white;">Coding & Mobile</h2>
+    <div class="lang-cloud">
+      <span class="lang-chip">PHP</span><span class="lang-chip">.NET</span><span class="lang-chip">Python</span><span class="lang-chip">Java</span><span class="lang-chip">RUST</span>
+      <span class="lang-chip">C++</span><span class="lang-chip">HTML/CSS</span><span class="lang-chip">JavaScript</span><span class="lang-chip">MySQL</span>
+      <span class="lang-chip">MS SQL</span><span class="lang-chip">SQL Azure</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap:1.5rem; margin-top:2rem;">
+      <div><i class="fas fa-apple-alt" style="font-size:2.5rem; color:var(--tech-accent);"></i><p style="color:white;">Native iOS/Android</p></div>
+      <div><i class="fas fa-crosshairs" style="font-size:2.5rem; color:var(--tech-accent);"></i><p style="color:white;">Cross‑platform</p></div>
+      <div><i class="fas fa-tv" style="font-size:2.5rem; color:var(--tech-accent);"></i><p style="color:white;">TV / OTT apps</p></div>
+    </div>
+  </div>
+
+  <!-- ERP modules -->
+  <div class="page">
+    <h2>ERP modules</h2>
+    <div style="display:flex; flex-direction:column; gap:2rem;">
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.8rem;">
+        <span><i class="fas fa-check-circle" style="color:var(--tech-accent);"></i> Finance</span>
+        <span><i class="fas fa-check-circle" style="color:var(--tech-accent);"></i> Sales & CRM</span>
+        <span><i class="fas fa-check-circle"></i> Supply Chain</span>
+        <span><i class="fas fa-check-circle"></i> Project Mgmt</span>
+        <span><i class="fas fa-check-circle"></i> Marketing</span>
+        <span><i class="fas fa-check-circle"></i> Human Resources</span>
+        <span><i class="fas fa-check-circle"></i> Manufacturing</span>
+      </div>
+      <div style="background: rgba(0,59,111,0.02); padding:1.5rem; border-radius:32px;">
+        <p>TECH TIME helps you choose the best ERP based on your organization size and business functions.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cloud & partners -->
+  <div class="page" style="background: var(--tech-sky);">
+    <h2>Cloud & Partners</h2>
+    <div style="display:flex; flex-direction:column; gap:2rem;">
+      <div>
+        <h3><i class="fas fa-cloud"></i> TECH TIME CLOUD</h3>
+        <div class="lang-cloud">
+          <span class="lang-chip" style="background:var(--tech-bright);">Microsoft 365</span>
+          <span class="lang-chip" style="background:var(--tech-bright);">Azure</span>
+          <span class="lang-chip">Google G Suite</span>
+          <span class="lang-chip">AWS</span>
+          <span class="lang-chip">IBM Cloud</span>
+          <span class="lang-chip">Dropbox</span>
+        </div>
+      </div>
+      <div>
+        <h3><i class="fas fa-handshake"></i> OUR PARTNERS</h3>
+        <div style="display:flex; gap:0.8rem; flex-wrap:wrap;">
+          <span class="lang-chip" style="background: #002b52;">Microsoft Partner</span>
+          <span class="lang-chip" style="background: #002b52;">Odoo Ready</span>
+          <span class="lang-chip" style="background: #002b52;">Google Cloud</span>
+        </div>
+        <p style="margin-top:1.2rem;">Microsoft Partner Iraq · Odoo exclusive access · Google Cloud data management.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- QA + 15 years -->
+  <div class="page" style="text-align: center;">
+    <div class="experience-badge" style="font-size:2.8rem; gap:1.5rem; padding:1.2rem 2rem; margin-bottom:2rem;">
+      <i class="fas fa-flask"></i> 15+ YEARS
+    </div>
+    <h2 style="border:none; text-align:center;">QA & Testing</h2>
+    <p>QA team from day one through launch. Automated & manual testing guarantees quality.</p>
+  </div>
+
+  <!-- Web & hosting packages -->
+  <div class="page">
+    <h2>Web & Hosting</h2>
+    <div class="grid-3">
+      <div class="card"><h3>BASIC DESIGN</h3><p>Dynamic website with essential pages. Editable by admin.</p></div>
+      <div class="card"><h3>PROFESSIONAL DESIGN</h3><p>Full custom dynamic website + training for site admins.</p></div>
+      <div class="card"><h3>HOSTING</h3><p>Linux/Windows, shared, VPS, dedicated, domain registration.</p></div>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div class="page" style="background: #001b3a;">
+    <div class="contact-block">
+      <div class="contact-item"><i class="fas fa-map-marker-alt"></i> Baghdad – Almansour<br>📞 +964 7802203330</div>
+      <div class="contact-item"><i class="fas fa-map-marker-alt"></i> Basrah – Manawi basha<br>📞 +964 7708890099</div>
+      <div class="contact-item"><i class="fas fa-envelope"></i> info@techtime.me<br>sales@techtime.me</div>
+    </div>
+    <div style="text-align:center;">
+      <span class="website-link">www.techtime.me</span>
+    </div>
+  </div>
+
+  <!-- ختام -->
+  <div class="page" style="text-align:center; padding:2rem;">
+    <i class="fas fa-microchip" style="font-size:3.5rem; color: var(--tech-bright);"></i>
+    <p style="font-size:1.6rem; font-weight:600; color:var(--tech-royal);">Let’s build the future, together.</p>
+  </div>
+</div>
+</body>
+</html>
