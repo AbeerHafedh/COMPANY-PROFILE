@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    /* reset و اساسيات مرنة */
     * {
       margin: 0;
       padding: 0;
@@ -19,7 +20,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 8px 6px; 
+      padding: 8px 6px;  /* تقليل الحواف الخارجية */
       min-height: 100vh;
     }
 
@@ -36,20 +37,22 @@
     }
 
     .brochure {
-      max-width: 1200px;
+      max-width: 1200px; /* أوسع شي للشاشات الكبيرة */
       width: 100%;
       background: var(--tech-white);
-      border-radius: 32px; 
+      border-radius: 32px; /* تقليل قليلاً للهاتف */
       box-shadow: 0 20px 40px -15px #001b3ab3;
       overflow: hidden;
     }
 
+    /* الصفحات - أحجام محسنة للهاتف */
     .page {
-      padding: 1.8rem 1.2rem;
+      padding: 1.8rem 1.2rem; /* أصغر بكثير ومناسب */
       position: relative;
       overflow: hidden;
     }
 
+    /* للشاشات الأكبر */
     @media (min-width: 600px) {
       .page {
         padding: 2.5rem 2rem;
@@ -74,8 +77,9 @@
       pointer-events: none;
     }
 
+    /* عناوين أصغر ومناسبة */
     h2 {
-      font-size: 2rem;     
+      font-size: 2rem;       /* حجم ثابت مناسب */
       font-weight: 700;
       letter-spacing: -0.02em;
       color: var(--tech-deep);
@@ -98,7 +102,7 @@
       position: absolute;
       bottom: -8px;
       left: 0;
-      width: 70px;          
+      width: 70px;           /* اصغر */
       height: 4px;
       background: linear-gradient(90deg, var(--tech-accent), var(--tech-bright));
       border-radius: 8px;
@@ -110,7 +114,7 @@
     }
 
     h3 {
-      font-size: 1.5rem;   
+      font-size: 1.5rem;      /* مناسب */
       font-weight: 600;
       color: var(--tech-deep);
       margin: 1rem 0 0.7rem;
@@ -135,7 +139,7 @@
     }
 
     p, li {
-      font-size: 0.95rem;     
+      font-size: 0.95rem;     /* مقروء على الهاتف */
       line-height: 1.5;
       color: var(--tech-gray);
     }
@@ -144,6 +148,7 @@
       p, li { font-size: 1.1rem; }
     }
 
+    /* grids - عمود واحد افتراضياً */
     .grid-2, .grid-3 {
       display: grid;
       gap: 1.2rem;
@@ -163,10 +168,11 @@
       .grid-3 { grid-template-columns: repeat(3, 1fr); }
     }
 
+    /* البطاقات - أصغر حجماً */
     .card {
       background: var(--tech-white);
-      border-radius: 24px;    
-      padding: 1.5rem 1.2rem; 
+      border-radius: 24px;     /* انحناء أقل */
+      padding: 1.5rem 1.2rem;  /* حشوة داخلية مناسبة */
       box-shadow: 0 10px 20px -8px rgba(0,27,58,0.15);
       border: 1px solid rgba(0,102,179,0.2);
       transition: all 0.25s cubic-bezier(0.2, 0.9, 0.3, 1.1);
@@ -183,7 +189,7 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 4px;       
+      width: 4px;            /* أرفع */
       height: 100%;
       background: linear-gradient(180deg, var(--tech-accent), var(--tech-bright));
       transition: width 0.2s ease;
@@ -204,7 +210,7 @@
     }
 
     .icon-large {
-      font-size: 2.5rem;      
+      font-size: 2.5rem;      /* ايقونات أصغر */
       color: var(--tech-bright);
       margin-bottom: 1rem;
       transition: all 0.25s ease;
@@ -216,6 +222,7 @@
       transform: scale(1.1) rotate(3deg);
     }
 
+    /* سحابة اللغات - اصغر */
     .lang-cloud {
       display: flex;
       flex-wrap: wrap;
@@ -226,13 +233,13 @@
     .lang-chip {
       background: var(--tech-deep);
       color: white;
-      padding: 0.5rem 1.2rem; 
+      padding: 0.5rem 1.2rem;   /* اصغر */
       border-radius: 60px;
       font-weight: 500;
-      font-size: 0.85rem;   
+      font-size: 0.85rem;       /* خط اصغر */
       letter-spacing: 0.2px;
       border: 1px solid rgba(255,255,255,0.1);
-      box-shadow: 0 4px 0 #001022;
+      box-shadow: 0 4px 0 #001022; /* ظل اقل */
       transition: all 0.15s cubic-bezier(0.2, 0.9, 0.3, 1.3);
       display: inline-block;
       cursor: pointer;
@@ -262,9 +269,10 @@
       box-shadow: 0 2px 0 #001022;
     }
 
+    /* الغلاف - ابعاد مناسبة */
     .cover {
       background: linear-gradient(145deg, #001227, #002b52);
-      padding: 2.5rem 1rem;    
+      padding: 2.5rem 1rem;      /* تقليل كبير */
       text-align: center;
       position: relative;
     }
@@ -282,7 +290,7 @@
     }
 
     .cover h1 {
-      font-size: 3.2rem;       
+      font-size: 3.2rem;         /* حجم مناسب للهاتف */
       font-weight: 800;
       color: white;
       line-height: 1;
@@ -303,7 +311,7 @@
     }
 
     .cover .sub {
-      font-size: 1rem;  
+      font-size: 1rem;          /* اصغر */
       color: #b0d4ff;
       margin-top: 1.2rem;
       border-top: 2px solid #ffb347;
@@ -320,15 +328,16 @@
       .cover .sub { font-size: 1.3rem; padding: 0.8rem 2.2rem; }
     }
 
+    /* شارة الخبرة - مناسبة */
     .experience-badge {
       background: var(--tech-deep);
       border-radius: 40px;
-      padding: 1rem 1.8rem; 
+      padding: 1rem 1.8rem;      /* اصغر */
       display: inline-flex;
       align-items: center;
       gap: 1rem;
       color: white;
-      font-size: 1.5rem;  
+      font-size: 1.5rem;        /* خط اصغر */
       font-weight: 700;
       border: 2px solid var(--tech-accent);
       box-shadow: 0 12px 15px -10px black;
@@ -359,12 +368,13 @@
       100% { transform: rotate(360deg); }
     }
 
+    /* كتلة الاتصال - محسنة */
     .contact-block {
       background: var(--tech-deep);
-      border-radius: 32px;       
-      padding: 1.8rem 1.5rem;  
+      border-radius: 32px;        /* انحناء اقل */
+      padding: 1.8rem 1.5rem;     /* تقليل */
       display: flex;
-      flex-direction: column;   
+      flex-direction: column;     /* عمودي على الهاتف */
       gap: 1.5rem;
       border: 2px solid var(--tech-accent);
       box-shadow: 0 15px 0 #001227;
@@ -383,7 +393,7 @@
       align-items: center;
       gap: 1rem;
       color: white;
-      font-size: 1rem;     
+      font-size: 1rem;          /* اصغر */
       transition: transform 0.2s;
       cursor: pointer;
     }
@@ -393,7 +403,7 @@
     }
 
     .contact-item i {
-      font-size: 2rem;         
+      font-size: 2rem;           /* ايقونات اصغر */
       color: var(--tech-accent);
       transition: all 0.25s;
     }
@@ -403,13 +413,14 @@
       color: white;
     }
 
+    /* رابط الويب */
     .website-link {
       background: #ffb347;
       color: #001b3a;
-      padding: 0.7rem 2rem;     
+      padding: 0.7rem 2rem;      /* اصغر */
       border-radius: 60px;
       font-weight: 800;
-      font-size: 1.2rem;     
+      font-size: 1.2rem;         /* مناسب */
       display: inline-block;
       text-decoration: none;
       margin-top: 1.5rem;
@@ -431,10 +442,11 @@
       transform: scale(1.03);
     }
 
+    /* banner الاستشاري */
     .consultant-banner {
       background: var(--tech-deep);
-      border-radius: 40px;        
-      padding: 1.5rem 1.5rem;     
+      border-radius: 40px;        /* انحناء اقل */
+      padding: 1.5rem 1.5rem;     /* تقليل */
       margin-top: 1.8rem;
       color: white;
       display: flex;
@@ -453,7 +465,7 @@
     }
 
     .consultant-banner i {
-      font-size: 2.8rem;         
+      font-size: 2.8rem;         /* اصغر */
       color: var(--tech-accent);
       transition: 0.25s;
     }
@@ -468,6 +480,7 @@
       font-size: 1.4rem;
     }
 
+    /* تعديلات اضافية دقيقة */
     .glow-dot {
       width: 150px;
       height: 150px;
@@ -483,6 +496,7 @@
       100% { transform: translate(15px, 10px) scale(1.1); }
     }
 
+    /* تحسينات نهائية للهاتف الصغير */
     @media (max-width: 380px) {
       h2 { font-size: 1.8rem; }
       .card { padding: 1.2rem 1rem; }
@@ -609,6 +623,7 @@
     </div>
   </div>
 
+  <!-- QA + 15 years -->
   <div class="page" style="text-align:center;">
     <div class="experience-badge" style="font-size:2rem; gap:1rem; padding:1rem 2rem; margin-bottom:1.5rem;">
       <i class="fas fa-flask"></i> 15+ YEARS
