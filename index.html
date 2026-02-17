@@ -3,518 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>Tech Time · مثالي للهاتف</title>
+  <title>Tech Time</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* reset و اساسيات مرنة */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  <link rel="stylesheet" href="style.css">
 
-    body {
-      background-color: #eef3f9;
-      font-family: 'Space Grotesk', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 8px 6px;  /* تقليل الحواف الخارجية */
-      min-height: 100vh;
-    }
 
-    :root {
-      --tech-deep: #001b3a;
-      --tech-royal: #003b6f;
-      --tech-bright: #0066b3;
-      --tech-accent: #ffb347;
-      --tech-accent-glow: #ff9f1c;
-      --tech-sky: #e2f0ff;
-      --tech-white: #ffffff;
-      --tech-gray: #1e2f40;
-      --tech-light: #f5f9ff;
-    }
-
-    .brochure {
-      max-width: 1200px; /* أوسع شي للشاشات الكبيرة */
-      width: 100%;
-      background: var(--tech-white);
-      border-radius: 32px; /* تقليل قليلاً للهاتف */
-      box-shadow: 0 20px 40px -15px #001b3ab3;
-      overflow: hidden;
-    }
-
-    /* الصفحات - أحجام محسنة للهاتف */
-    .page {
-      padding: 1.8rem 1.2rem; /* أصغر بكثير ومناسب */
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* للشاشات الأكبر */
-    @media (min-width: 600px) {
-      .page {
-        padding: 2.5rem 2rem;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .page {
-        padding: 4rem 5rem;
-      }
-    }
-
-    .page::before {
-      content: '';
-      position: absolute;
-      top: -20%;
-      right: -10%;
-      width: 60%;
-      height: 70%;
-      background: radial-gradient(circle at 70% 30%, rgba(0,107,179,0.03) 0%, transparent 70%);
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* عناوين أصغر ومناسبة */
-    h2 {
-      font-size: 2rem;       /* حجم ثابت مناسب */
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--tech-deep);
-      margin-bottom: 1.5rem;
-      position: relative;
-      z-index: 2;
-      line-height: 1.2;
-    }
-
-    @media (min-width: 600px) {
-      h2 { font-size: 2.5rem; }
-    }
-
-    @media (min-width: 1024px) {
-      h2 { font-size: 3.2rem; }
-    }
-
-    h2::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 0;
-      width: 70px;           /* اصغر */
-      height: 4px;
-      background: linear-gradient(90deg, var(--tech-accent), var(--tech-bright));
-      border-radius: 8px;
-      transition: width 0.3s ease;
-    }
-
-    h2:hover::after {
-      width: 100px;
-    }
-
-    h3 {
-      font-size: 1.5rem;      /* مناسب */
-      font-weight: 600;
-      color: var(--tech-deep);
-      margin: 1rem 0 0.7rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    @media (min-width: 600px) {
-      h3 { font-size: 1.8rem; }
-    }
-
-    h3 i {
-      color: var(--tech-accent);
-      font-size: 1.8rem;
-      transition: transform 0.3s ease;
-    }
-
-    h3:hover i {
-      transform: rotate(8deg) scale(1.1);
-    }
-
-    p, li {
-      font-size: 0.95rem;     /* مقروء على الهاتف */
-      line-height: 1.5;
-      color: var(--tech-gray);
-    }
-
-    @media (min-width: 600px) {
-      p, li { font-size: 1.1rem; }
-    }
-
-    /* grids - عمود واحد افتراضياً */
-    .grid-2, .grid-3 {
-      display: grid;
-      gap: 1.2rem;
-      position: relative;
-      z-index: 5;
-    }
-
-    .grid-2, .grid-3 {
-      grid-template-columns: 1fr;
-    }
-
-    @media (min-width: 640px) {
-      .grid-2 { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (min-width: 900px) {
-      .grid-3 { grid-template-columns: repeat(3, 1fr); }
-    }
-
-    /* البطاقات - أصغر حجماً */
-    .card {
-      background: var(--tech-white);
-      border-radius: 24px;     /* انحناء أقل */
-      padding: 1.5rem 1.2rem;  /* حشوة داخلية مناسبة */
-      box-shadow: 0 10px 20px -8px rgba(0,27,58,0.15);
-      border: 1px solid rgba(0,102,179,0.2);
-      transition: all 0.25s cubic-bezier(0.2, 0.9, 0.3, 1.1);
-      position: relative;
-      backdrop-filter: blur(4px);
-      z-index: 5;
-      overflow: hidden;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;            /* أرفع */
-      height: 100%;
-      background: linear-gradient(180deg, var(--tech-accent), var(--tech-bright));
-      transition: width 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-6px) scale(1.01);
-      box-shadow: 0 20px 30px -12px #003b6f4d;
-      border-color: var(--tech-accent);
-    }
-
-    .card:hover::before {
-      width: 8px;
-    }
-
-    .card:active {
-      transform: scale(0.98) translateY(-2px);
-    }
-
-    .icon-large {
-      font-size: 2.5rem;      /* ايقونات أصغر */
-      color: var(--tech-bright);
-      margin-bottom: 1rem;
-      transition: all 0.25s ease;
-      display: inline-block;
-    }
-
-    .card:hover .icon-large {
-      color: var(--tech-accent);
-      transform: scale(1.1) rotate(3deg);
-    }
-
-    /* سحابة اللغات - اصغر */
-    .lang-cloud {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin: 1.5rem 0;
-    }
-
-    .lang-chip {
-      background: var(--tech-deep);
-      color: white;
-      padding: 0.5rem 1.2rem;   /* اصغر */
-      border-radius: 60px;
-      font-weight: 500;
-      font-size: 0.85rem;       /* خط اصغر */
-      letter-spacing: 0.2px;
-      border: 1px solid rgba(255,255,255,0.1);
-      box-shadow: 0 4px 0 #001022; /* ظل اقل */
-      transition: all 0.15s cubic-bezier(0.2, 0.9, 0.3, 1.3);
-      display: inline-block;
-      cursor: pointer;
-    }
-
-    @media (min-width: 600px) {
-      .lang-chip {
-        padding: 0.6rem 1.6rem;
-        font-size: 1rem;
-        box-shadow: 0 6px 0 #001022;
-      }
-    }
-
-    .lang-chip:nth-child(odd) {
-      background: var(--tech-royal);
-    }
-
-    .lang-chip:hover {
-      transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 6px 0 #001022;
-      background: var(--tech-accent);
-      color: var(--tech-deep);
-    }
-
-    .lang-chip:active {
-      transform: translateY(2px) scale(0.98);
-      box-shadow: 0 2px 0 #001022;
-    }
-
-    /* الغلاف - ابعاد مناسبة */
-    .cover {
-      background: linear-gradient(145deg, #001227, #002b52);
-      padding: 2.5rem 1rem;      /* تقليل كبير */
-      text-align: center;
-      position: relative;
-    }
-
-    @media (min-width: 600px) {
-      .cover { padding: 4rem 2rem; }
-    }
-
-    .cover::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 30% 50%, rgba(255,180,70,0.15) 0%, transparent 60%);
-      z-index: 1;
-    }
-
-    .cover h1 {
-      font-size: 3.2rem;         /* حجم مناسب للهاتف */
-      font-weight: 800;
-      color: white;
-      line-height: 1;
-      text-shadow: 0 10px 20px #00000060;
-      letter-spacing: -1px;
-      position: relative;
-      z-index: 5;
-      animation: glowPulse 3s infinite alternate;
-    }
-
-    @media (min-width: 600px) {
-      .cover h1 { font-size: 5rem; }
-    }
-
-    @keyframes glowPulse {
-      0% { text-shadow: 0 5px 10px #00000080; }
-      100% { text-shadow: 0 15px 30px #ffb34780; }
-    }
-
-    .cover .sub {
-      font-size: 1rem;          /* اصغر */
-      color: #b0d4ff;
-      margin-top: 1.2rem;
-      border-top: 2px solid #ffb347;
-      display: inline-block;
-      padding: 0.6rem 1.5rem;
-      background: rgba(0,0,0,0.2);
-      backdrop-filter: blur(8px);
-      border-radius: 60px;
-      z-index: 5;
-      position: relative;
-    }
-
-    @media (min-width: 600px) {
-      .cover .sub { font-size: 1.3rem; padding: 0.8rem 2.2rem; }
-    }
-
-    /* شارة الخبرة - مناسبة */
-    .experience-badge {
-      background: var(--tech-deep);
-      border-radius: 40px;
-      padding: 1rem 1.8rem;      /* اصغر */
-      display: inline-flex;
-      align-items: center;
-      gap: 1rem;
-      color: white;
-      font-size: 1.5rem;        /* خط اصغر */
-      font-weight: 700;
-      border: 2px solid var(--tech-accent);
-      box-shadow: 0 12px 15px -10px black;
-      transition: all 0.25s;
-      cursor: pointer;
-    }
-
-    @media (min-width: 600px) {
-      .experience-badge {
-        font-size: 2rem;
-        padding: 1.2rem 2.5rem;
-      }
-    }
-
-    .experience-badge:hover {
-      transform: scale(1.03) rotate(0.5deg);
-      border-color: white;
-      box-shadow: 0 20px 20px -10px #ffb347;
-    }
-
-    .experience-badge i {
-      font-size: 1.8rem;
-      animation: starSpin 4s infinite linear;
-    }
-
-    @keyframes starSpin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    /* كتلة الاتصال - محسنة */
-    .contact-block {
-      background: var(--tech-deep);
-      border-radius: 32px;        /* انحناء اقل */
-      padding: 1.8rem 1.5rem;     /* تقليل */
-      display: flex;
-      flex-direction: column;     /* عمودي على الهاتف */
-      gap: 1.5rem;
-      border: 2px solid var(--tech-accent);
-      box-shadow: 0 15px 0 #001227;
-    }
-
-    @media (min-width: 600px) {
-      .contact-block {
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 2.5rem;
-      }
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      color: white;
-      font-size: 1rem;          /* اصغر */
-      transition: transform 0.2s;
-      cursor: pointer;
-    }
-
-    .contact-item:hover {
-      transform: translateX(5px);
-    }
-
-    .contact-item i {
-      font-size: 2rem;           /* ايقونات اصغر */
-      color: var(--tech-accent);
-      transition: all 0.25s;
-    }
-
-    .contact-item:hover i {
-      transform: scale(1.1) rotate(3deg);
-      color: white;
-    }
-
-    /* رابط الويب */
-    .website-link {
-      background: #ffb347;
-      color: #001b3a;
-      padding: 0.7rem 2rem;      /* اصغر */
-      border-radius: 60px;
-      font-weight: 800;
-      font-size: 1.2rem;         /* مناسب */
-      display: inline-block;
-      text-decoration: none;
-      margin-top: 1.5rem;
-      transition: all 0.25s;
-      border: 2px solid transparent;
-    }
-
-    @media (min-width: 600px) {
-      .website-link {
-        font-size: 1.6rem;
-        padding: 1rem 3rem;
-      }
-    }
-
-    .website-link:hover {
-      background: transparent;
-      color: #ffb347;
-      border-color: #ffb347;
-      transform: scale(1.03);
-    }
-
-    /* banner الاستشاري */
-    .consultant-banner {
-      background: var(--tech-deep);
-      border-radius: 40px;        /* انحناء اقل */
-      padding: 1.5rem 1.5rem;     /* تقليل */
-      margin-top: 1.8rem;
-      color: white;
-      display: flex;
-      gap: 1.2rem;
-      align-items: center;
-      flex-wrap: wrap;
-      border: 2px solid transparent;
-      transition: all 0.3s;
-      cursor: pointer;
-    }
-
-    .consultant-banner:hover {
-      border-color: var(--tech-accent);
-      transform: translateY(-4px);
-      box-shadow: 0 20px 25px -15px #ffb347;
-    }
-
-    .consultant-banner i {
-      font-size: 2.8rem;         /* اصغر */
-      color: var(--tech-accent);
-      transition: 0.25s;
-    }
-
-    .consultant-banner:hover i {
-      transform: rotate(6deg) scale(1.1);
-    }
-
-    .consultant-banner h3 {
-      color: white;
-      margin: 0;
-      font-size: 1.4rem;
-    }
-
-    /* تعديلات اضافية دقيقة */
-    .glow-dot {
-      width: 150px;
-      height: 150px;
-      background: radial-gradient(circle, #ffb34720 0%, transparent 70%);
-      position: absolute;
-      border-radius: 50%;
-      z-index: 0;
-      animation: float 8s infinite alternate;
-    }
-
-    @keyframes float {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(15px, 10px) scale(1.1); }
-    }
-
-    /* تحسينات نهائية للهاتف الصغير */
-    @media (max-width: 380px) {
-      h2 { font-size: 1.8rem; }
-      .card { padding: 1.2rem 1rem; }
-      .icon-large { font-size: 2.2rem; }
-      .lang-chip { padding: 0.4rem 0.8rem; font-size: 0.75rem; }
-    }
-  </style>
 </head>
 <body>
 <div class="brochure">
-  <!-- cover -->
   <div class="cover">
     <div class="glow-dot" style="top:-30px; right:-20px;"></div>
     <h1>TECH TIME</h1>
     <div class="sub">COMPANY PROFILE</div>
   </div>
 
-  <!-- about -->
   <div class="page">
     <h2>About TechTime</h2>
     <div class="grid-2">
@@ -532,7 +35,6 @@
     </div>
   </div>
 
-  <!-- vision mission -->
   <div class="page" style="background: linear-gradient(120deg, #f5fbff, white);">
     <div class="grid-2">
       <div class="card">
@@ -550,7 +52,6 @@
     </div>
   </div>
 
-  <!-- services -->
   <div class="page" style="background: var(--tech-light);">
     <h2>Our Services</h2>
     <div class="grid-3">
@@ -567,7 +68,6 @@
     </div>
   </div>
 
-  <!-- coding languages -->
   <div class="page" style="background: var(--tech-deep);">
     <h2 style="color: white;">Coding & Mobile</h2>
     <div class="lang-cloud">
@@ -582,7 +82,6 @@
     </div>
   </div>
 
-  <!-- ERP modules -->
   <div class="page">
     <h2>ERP modules</h2>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; margin-bottom:1.5rem;">
@@ -599,7 +98,6 @@
     </div>
   </div>
 
-  <!-- partners -->
   <div class="page" style="background: var(--tech-sky);">
     <h2>Cloud & Partners</h2>
     <div style="margin-bottom:1.5rem;">
@@ -623,7 +121,6 @@
     </div>
   </div>
 
-  <!-- QA + 15 years -->
   <div class="page" style="text-align:center;">
     <div class="experience-badge" style="font-size:2rem; gap:1rem; padding:1rem 2rem; margin-bottom:1.5rem;">
       <i class="fas fa-flask"></i> 15+ YEARS
@@ -632,7 +129,7 @@
     <p>QA team from day one through launch. Automated & manual testing guarantees quality.</p>
   </div>
 
-  <!-- web hosting -->
+
   <div class="page">
     <h2>Web & Hosting</h2>
     <div class="grid-3">
@@ -642,23 +139,85 @@
     </div>
   </div>
 
-  <!-- contact -->
   <div class="page" style="background: #001b3a;">
-    <div class="contact-block">
-      <div class="contact-item"><i class="fas fa-map-marker-alt"></i> Baghdad – Almansour<br>📞 +964 7802203330</div>
-      <div class="contact-item"><i class="fas fa-map-marker-alt"></i> Basrah – Manawi basha<br>📞 +964 7708890099</div>
-      <div class="contact-item"><i class="fas fa-envelope"></i> info@techtime.me<br>sales@techtime.me</div>
+    <div style="background: var(--tech-deep); border-radius: 32px; padding: 1.8rem 1.5rem; display: flex; flex-direction: column; gap: 1.5rem; border: 2px solid var(--tech-accent); box-shadow: 0 15px 0 #001227;">
+      <div style="display: flex; align-items: center; gap: 1rem; color: white; font-size: 1rem;">
+        <i class="fas fa-map-marker-alt" style="font-size: 2rem; color: var(--tech-accent);"></i> Baghdad – Almansour, Iraq<br>📞 +964 7802203330
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem; color: white; font-size: 1rem;">
+        <i class="fas fa-map-marker-alt" style="font-size: 2rem; color: var(--tech-accent);"></i> Basrah – Manawi basha, Iraq<br>📞 +964 7708890099
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem; color: white; font-size: 1rem;">
+        <i class="fas fa-envelope" style="font-size: 2rem; color: var(--tech-accent);"></i> info@techtime.me<br>sales@techtime.me
+      </div>
     </div>
-    <div style="text-align:center;">
-      <span class="website-link">www.techtime.me</span>
+    <div style="text-align:center; margin-top:1.5rem;">
+      <span style="background: #ffb347; color:#001b3a; padding:0.7rem 2rem; border-radius:60px; font-weight:800; font-size:1.2rem; display:inline-block;">www.techtime.me</span>
     </div>
   </div>
 
-  <!-- footer -->
-  <div class="page" style="text-align:center; padding:1.5rem;">
-    <i class="fas fa-microchip" style="font-size:2.5rem; color: var(--tech-bright);"></i>
-    <p style="font-size:1.3rem; font-weight:600; color:var(--tech-royal);">Let’s build the future, together.</p>
-  </div>
+  <footer class="professional-footer">
+    <div class="footer-grid">
+
+      <div class="footer-col">
+        <h4>Tech Time</h4>
+        <ul>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Our Team</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Careers</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> News & Insights</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> ERP Systems</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Cloud Services</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Custom Software</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Web & Mobile</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> IT Consulting</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Help Center</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Documentation</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> FAQs</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Contact Support</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <div class="contact-info-footer">
+          <div class="item"><i class="fas fa-phone-alt"></i> +964 780 220 3330</div>
+          <div class="item"><i class="fas fa-envelope"></i> info@techtime.me</div>
+          <div class="item"><i class="fas fa-map-marker-alt"></i> Baghdad, Iraq</div>
+        </div>
+        <div class="social-links">
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="copyright">
+        <i class="far fa-copyright"></i> 2025 Tech Time · وقت التكنولوجيا. All rights reserved.
+      </div>
+      <div class="legal-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+  </footer>
 </div>
 </body>
 </html>
